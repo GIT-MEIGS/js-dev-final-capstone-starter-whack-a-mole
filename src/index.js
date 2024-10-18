@@ -2,10 +2,10 @@ const holes = document.querySelectorAll('.hole');
 const moles = document.querySelectorAll('.mole');
 const startButton = document.querySelector('#start');
 // TODO: Add the missing query selectors:
-const score = document.querySelector('.score'); // Use querySelector() to get the score element
-const timerDisplay = document.querySelector('.timerDisplay') // use querySelector() to get the timer element.
+const score = document.querySelector('#score'); // Use querySelector() to get the score element
+const timerDisplay = document.querySelector('#timer') // use querySelector() to get the timer element.
 
-let time = 0;
+let time = 10;
 let timer;
 let lastHole = 0;
 let points = 0;
@@ -41,16 +41,16 @@ function randomInteger(min, max) {
  */
 function setDelay(difficulty) {
   // TODO: Write your code here.
-  let delay; 
+  let setDelay; 
 
   if (difficulty === 'easy') {
-    delay = 1500;
+    setDelay = 1500;
   } else if (difficulty === 'normal') {
-    delay = 1000; 
+    setDelay = 1000; 
   } else if (difficulty === 'hard') {
-    delay = Math.floor(Math.random() * (1200 - 600 +1)) + 600;
+    setDelay = Math.floor(Math.random() * (1200 - 600 +1)) + 600;
 }
-return delay;
+return setDelay;
 }
 
 /**
@@ -167,7 +167,8 @@ function toggleVisibility(hole) {
 */
 function updateScore() {
   // TODO: Write your code here
-
+  points +=1;
+  document.getElementById('score').textContent = points;
   return points;
 }
 
@@ -180,8 +181,8 @@ function updateScore() {
 */
 function clearScore() {
   // TODO: Write your code here
-  // points = 0;
-  // score.textContent = points;
+  points = 0;
+  document.getElementById('score').textContent = points;
   return points;
 }
 
@@ -193,7 +194,10 @@ function clearScore() {
 function updateTimer() {
   // TODO: Write your code here.
   // hint: this code is provided to you in the instructions.
-  
+  if (time > 0){
+    time -= 1;
+    document.timerDisplay.textContent = time;
+  }
   return time;
 }
 
@@ -205,7 +209,7 @@ function updateTimer() {
 */
 function startTimer() {
   // TODO: Write your code here
-  // timer = setInterval(updateTimer, 1000);
+  timer = setInterval(updateTimer, 1000);
   return timer;
 }
 
@@ -220,6 +224,7 @@ function startTimer() {
 function whack(event) {
   // TODO: Write your code here.
   // call updateScore()
+  updateScore();
   return points;
 }
 
@@ -230,7 +235,9 @@ function whack(event) {
 */
 function setEventListeners(){
   // TODO: Write your code here
-
+  moles.forEach(
+    mole => mole.addEventListener('click', whack)
+);
   return moles;
 }
 
@@ -267,6 +274,9 @@ function startGame(){
   setDuration(10);
   showUp();
   return "game started";
+  setEventListeners();
+  startTimer();
+  updateTimer();
 }
 
 startButton.addEventListener("click", startGame);
