@@ -271,10 +271,17 @@ function stopGame(){
 */
 function startGame(){ 
   setDuration(10);
-  showUp();
+  if (difficulty === 'easy') {
+    setDuration(15);
+  } else if (difficulty === 'normal') {
+    setDuration(10);
+  } else if (difficulty === 'hard') {
+    setDuration(5);
+  }
+  // showUp();
   setEventListeners();
+  clearScore();
   startTimer();
-  updateTimer();
   return "game started";
 }
 
