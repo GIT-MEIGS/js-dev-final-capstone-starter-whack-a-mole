@@ -41,16 +41,14 @@ function randomInteger(min, max) {
  */
 function setDelay(difficulty) {
   // TODO: Write your code here.
-  let setDelay; 
 
   if (difficulty === 'easy') {
-    setDelay = 1500;
+    return 1500;
   } else if (difficulty === 'normal') {
-    setDelay = 1000; 
+    return 1000; 
   } else if (difficulty === 'hard') {
-    setDelay = Math.floor(Math.random() * (1200 - 600 +1)) + 600;
+    return Math.floor(Math.random() * (1200 - 600 +1)) + 600;
 }
-return setDelay;
 }
 
 /**
@@ -73,9 +71,10 @@ function chooseHole(holes) {
   const hole = holes[index];
   if (hole === lastHole) {
     return chooseHole(holes);
-  }
+  } else {
   lastHole = hole;
   return hole;
+  }
 }
 
 /**
@@ -168,7 +167,7 @@ function toggleVisibility(hole) {
 function updateScore() {
   // TODO: Write your code here
   points +=1;
-  document.getElementById('score').textContent = points;
+  score.textContent = points;
   return points;
 }
 
@@ -182,7 +181,7 @@ function updateScore() {
 function clearScore() {
   // TODO: Write your code here
   points = 0;
-  document.getElementById('score').textContent = points;
+  score.textContent = points;
   return points;
 }
 
@@ -196,7 +195,7 @@ function updateTimer() {
   // hint: this code is provided to you in the instructions.
   if (time > 0){
     time -= 1;
-    document.timerDisplay.textContent = time;
+    timerDisplay.textContent = time;
   }
   return time;
 }
@@ -270,13 +269,13 @@ function stopGame(){
 * is clicked.
 *
 */
-function startGame(){
+function startGame(){ 
   setDuration(10);
   showUp();
-  return "game started";
   setEventListeners();
   startTimer();
   updateTimer();
+  return "game started";
 }
 
 startButton.addEventListener("click", startGame);
