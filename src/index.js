@@ -9,7 +9,7 @@ let time = 10;
 let timer;
 let lastHole = 0;
 let points = 0;
-let difficulty = "hard";
+let difficulty = "normal";
 
 /**
  * Generates a random integer within a range.
@@ -41,7 +41,6 @@ function randomInteger(min, max) {
  */
 function setDelay(difficulty) {
   // TODO: Write your code here.
-
   if (difficulty === 'easy') {
     return 1500;
   } else if (difficulty === 'normal') {
@@ -278,7 +277,7 @@ function startGame(){
   } else if (difficulty === 'hard') {
     setDuration(5);
   }
-  // showUp();
+  showUp();
   setEventListeners();
   clearScore();
   startTimer();
